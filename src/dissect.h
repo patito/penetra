@@ -2,20 +2,27 @@
 #define __DISSECT_H__
 
 #include <penetra/types.h>
+#include <penetra/penetra.h>
 
 /*
  * Dissect Options
  */
-#define DISSECT_FORMAT   'f'
+#define DISSECT_ALL      'a'
+#define DISSECT_DOS      'd'
 #define DISSECT_COFF     'c'
-#define DISSECT_OPTIONAL 'p'
+#define DISSECT_HELP     'h'
+#define DISSECT_OPTIONAL 't'
 #define DISSECT_BINARY   'i'
-#define DISSECT_FILE     'o'
 #define DISSECT_UNKNOWN  '?'
 
 /* Store info about dissect */
 typedef struct  {
-        char *fname;                       /* Output File */
+	Penetra pen;
+	char *fname;
+	_u8 flag_dos;
+	_u8 flag_coff;
+	_u8 flag_optional;
+	_u8 flag_all;
 } Dissect;
 
 

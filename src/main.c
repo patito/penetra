@@ -1,21 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <getopt.h>
 
 #include <penetra/error.h>
 
-#include <unstable/unstable.h>
 
 #include "dissect.h"
 #include "util.h"
 
 #define DISSECT "dissect"
 
-static void _penalise_help()
+static void _penetra_help()
 {
     HELP("\n");
-    HELP("Tool to analise PE binary.\n");
-    HELP("Usage: penalise <command> [-h] <options> \n");
+    HELP("Tool to analyse PE binary.\n");
+    HELP("Usage: penetra <command> [-h] <options> \n");
     HELP("Commands:\n");
     HELP("         dissect \tShow PE binary info. \n");
     HELP("\n");
@@ -26,18 +26,20 @@ static void _penalise_help()
 
 int main(int argc, char **argv)
 {
+	Dissect dissect;
+	_u32 error;
+	(void)error;
 
     if (argc == 1) {
-        _penalise_help();
+        _penetra_help();
         return -1;
     }
 
     if (strncmp(argv[1], DISSECT, sizeof(DISSECT)) == 0) {
-        //error = malelf_dissect_init(&dissect, argc, argv);
-        //malelf_dissect_finish(&dissect);
-         printf("Dissecando! =)\n");
+        error = dissect_init(&dissect, argc, argv);
+        dissect_finish(&dissect);
     } else {
-         printf("Error Bitch! =)\n");
+		_penetra_help();
     }
 
 	return 0;
